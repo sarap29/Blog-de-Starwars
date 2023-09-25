@@ -7,25 +7,31 @@ export const Personajes = () => {
   const { store, actions } = useContext(Context);
   return (
     <div>
-      <div className="row">
+      <div className="row principal">
         {store.personajes.map((item) => {
           return (
-            <div key={item.uid} className="col-12 col-md-2">
-              <div className="card">
+            <div key={item.uid} className="col-2 d-flex">
+              <div className="card mb-5">
+              <Link to={`/detallespersonaje/${item.uid}`}>
                 <img
+                 href="{`/detallespersonaje/${item.uid}`}"
                   className="card-img-top"
                   src={`https://starwars-visualguide.com/assets/img/characters/${item.uid}.jpg`}
                   alt="..."
                 />
+                   </Link> 
                 <div className="card-body">
                   <h3>{item.name}</h3>
                 </div>
-
-                <div><Link to={`/detallespersonaje/${item.uid}`}>
-                  <span className="btn btn-primary btn-lg" href="#" role="button">  Más información
-                  </span>
+<div><hr></hr></div>
+                <div className="info"><Link to={`/detallespersonaje/${item.uid}`}>
+                  <p id="enlace">  Más información
+                  </p>
                 </Link> 
-                <i className="fa-solid fa-heart me-3" onClick={() => actions.incluirFavoritos(item.name)}></i>
+                
+                </div>
+                <div>
+                <i className="fa-solid fa-heart" onClick={() => actions.incluirFavoritos(item.name)}></i>
                 </div>
               </div>
             </div>

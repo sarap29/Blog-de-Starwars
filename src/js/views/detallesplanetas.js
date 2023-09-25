@@ -1,34 +1,63 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/detalles.css";
 
 export const DetallesPlanetas = () => {
-    // Utiliza el hook useContext para acceder al contexto definido en appContext.
     const { store, actions } = useContext(Context);
-
-    // Obtiene los parámetros de la URL proporcionados por react-router-dom.
     const params = useParams();
-
-    // Utiliza el hook useState para crear una variable de estado llamada infoPersonaje
-    // e inicialízala con un valor vacío.
     const [infoPlanetas, setInfoPlanetas] = useState("");
+    window.scrollTo(0,0)
 
-    // Utiliza el hook useEffect para realizar una solicitud HTTP cuando el componente se monta.
     useEffect(() => {
-        // Realiza una solicitud fetch a la API de Star Wars (SWAPI) para obtener información
-        // sobre un personaje específico. Utiliza el parámetro 'uid' de la URL para construir la URL.
-        fetch(`https://www.swapi.tech/api/people/${params.uid}`)
+    
+        fetch(`https://www.swapi.tech/api/planets/${params.uid}`)
             .then(response => response.json()) // Parsea la respuesta HTTP a formato JSON.
             .then(data => setInfoPlanetas(data.result)) // Actualiza la variable de estado con la información obtenida.
             .catch(error => error); // Captura cualquier error que ocurra durante la solicitud.
-    }, []); // El segundo argumento, un arreglo vacío, significa que este efecto se ejecutará solo una vez, al montar el componente.
+    }, []); 
 
     return (
         <div>
-            <div>{params.uid}</div>
-            <h1>{infoPlanetas === "" ? "Cargando" : infoPlanetas.description}</h1>
+            <div className="espaciado"></div>	
+		<div className="encabezado">
+			<h3 className= "line-2 anim-typewriter">{infoPlanetas === "" ? "Cargando" : infoPlanetas.description}</h3>
+		</div>
+            <div className="container cuerpodetalles">
+                <div className="row">
+                <div className="col-12">
+                    <h2>Detalles del planeta</h2>
+                    <hr className="hrblanco"></hr>
+                </div>
+
+                <div className="col-sm-12 col-md-5">
+                        <img className="imagendetalles"
+                            src={`https://starwars-visualguide.com/assets/img/planets/${params.uid}.jpg`}
+                            onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src="https://starwars-visualguide.com/assets/img/planets/13.jpg";
+                              }}
+                        ></img>
+                    </div>
+
+                <div className="col-sm-12 col-md-7">
+                    <h4><span className="titulo">Name: </span> {infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.name}</h4>
+                        <h4><span className="titulo">Diameter: </span> {infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.diameter}</h4>
+                        <h4><span className="titulo">Rotation Period:</span> {infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.rotation_period}</h4>
+                        <h4><span className="titulo">Orbital Period:</span> {infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.orbital_period}</h4>
+                        <h4><span className="titulo">Gravity:</span> {infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.gravity}</h4>                     
+                        <h4><span className="titulo">Population: </span>{infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.population}</h4> 
+                        <h4><span className="titulo">Climate:</span> {infoPlanetas === "" ? "Cargando" : infoPlanetas.properties.climate}</h4> 
+                        
+                    </div>
+
+                
+                   
+                </div>
+            </div>
         </div>
     );
 };
+
 
 export default DetallesPlanetas;

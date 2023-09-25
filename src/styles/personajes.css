@@ -1,5 +1,27 @@
-.col-md-2 {
-    margin: 0 auto;
-    flex: 0 0 auto;
-    width: 17.666667%;
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;200&display=swap');
+
+h3 {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-family: 'Martian Mono', monospace;
+}
+
+p {
+    font-size: 13px;
+    font-family: 'Martian Mono', monospace;
+    color: #979797;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+
+p#enlace:hover {
+    color: #aa3689;
 }
