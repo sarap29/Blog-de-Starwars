@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/detalles.css";
+import { Link } from "react-router-dom";
 
 export const DetallesPlanetas = () => {
     const { store, actions } = useContext(Context);
@@ -25,9 +26,15 @@ export const DetallesPlanetas = () => {
 		</div>
             <div className="container cuerpodetalles">
                 <div className="row">
-                <div className="col-12">
+                <div className="col-6">
                     <h2>Detalles del planeta</h2>
                     <hr className="hrblanco"></hr>
+                </div>
+                <div className="col-6">
+                <Link to="/">
+                    <h6>  
+                   <i class="fa-solid fa-arrow-left"></i> Volver a home  </h6>
+                   </Link> 
                 </div>
 
                 <div className="col-sm-12 col-md-5">
